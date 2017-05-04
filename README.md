@@ -1,5 +1,7 @@
 # batch_request_api
 
+[![NetflixOSS Lifecycle](https://img.shields.io/osslifecycle/Netflix/osstracker.svg)]()
+
 Rails middleware gem to achieve Batch creates, updates and deletes.
 
   * Customizable middleware
