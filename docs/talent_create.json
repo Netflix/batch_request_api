@@ -1,0 +1,22 @@
+[
+  {
+    "talent": {
+      "name": "Darth Vader",
+      "roles": [
+        "Cast"
+      ],
+      "phone": "1234567",
+      "app": "Test 55"
+    }
+  },
+  {
+    "talent": {
+      "name": "Darth Sonar",
+      "roles": [
+        "Cast"
+      ],
+      "phone": "123444567",
+      "app": "Test 56"
+    }
+  }
+]

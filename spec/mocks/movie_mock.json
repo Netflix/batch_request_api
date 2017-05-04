@@ -1,0 +1,46 @@
+{
+  "requests": [
+    {
+      "method": "PATCH",
+      "url": "/api/v1/movies/1",
+      "body": {
+        "data": {
+          "attributes": {
+            "name": "The Zen Monk",
+            "year": 2015
+          },
+          "relationships": {
+            "movie_type": {
+              "data": {
+                "type": "movie-types",
+                "id": "1"
+              }
+            }
+          },
+          "type": "movies"
+        }
+      }
+    },
+    {
+      "method": "PATCH",
+      "url": "/api/v1/movies/1",
+      "body": {
+        "data": {
+          "attributes": {
+            "name": "The Zen Monk 2",
+            "year": 2016
+          },
+          "relationships": {
+            "movie_type": {
+              "data": {
+                "type": "movie-types",
+                "id": "1"
+              }
+            }
+          },
+          "type": "movies"
+        }
+      }
+    }
+  ]
+}
