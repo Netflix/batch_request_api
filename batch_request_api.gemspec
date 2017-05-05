@@ -9,6 +9,11 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{Batch API middleware.}
   spec.description   = %q{Batch API middleware.}
   spec.homepage      = "https://github.com/Netflix/batch_request_api"
-  spec.license       = "Apache 2"
+  spec.license       = "Apache 2.0"
   spec.require_paths = ["lib"]
+
+  spec.add_dependency 'rails', '>= 4.2.4'
+
+  spec.add_development_dependency "bundler", "~> 1.7"
+  spec.add_development_dependency "rake", "~> 10.0"
 end
