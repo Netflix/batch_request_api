@@ -42,7 +42,7 @@ The batch request payload is available on the controller using ``` params['json'
 
 We expect that you will probably use the [Ember Add on](https://github.com/Netflix/ember-batch-request) with this gem to make the batch request and receive a response.
 
-If not, no worries we have built a [sample Ruby Client](https://github.com/Netflix/batch_request_client) for you on this gem.
+If not, no worries we have built a [sample Ruby Client](https://github.com/Netflix/batch_request_client) for that reason.
 
 Here are the sample payloads that the middleware expects for [create/update/delete](https://github.com/Netflix/batch_request_api/blob/master/docs/expected_middleware_payload.md).
 The ruby client constructs the format for create action.
