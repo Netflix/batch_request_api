@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/Netflix/batch_request_api"
   spec.license       = "Apache-2.0"
   spec.require_paths = ["lib"]
-  spec.files         = `git ls-files lib`.split($/)
+  spec.files         = `git ls-files lib config`.split($/)
 
   spec.add_dependency 'rails', '>= 4.0'
 
