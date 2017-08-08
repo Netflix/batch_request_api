@@ -10,12 +10,12 @@ module BatchRequestApi
   end
 
   class Configuration
-    attr_accessor :batch_sequential_path
-    attr_accessor :batch_parallel_path
+    attr_accessor :batch_sequential_paths
+    attr_accessor :batch_parallel_paths
 
     def initialize
-      self.batch_sequential_path = '/api/v1/batch_sequential'
-      self.batch_parallel_path = '/api/v1/batch_parallel'
+      self.batch_sequential_paths = ['/api/v1/batch_sequential']
+      self.batch_parallel_paths = ['/api/v1/batch_parallel']
     end
   end
 end

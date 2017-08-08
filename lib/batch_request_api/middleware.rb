@@ -14,21 +14,21 @@ module BatchRequestApi
     end
 
     def call(env)
-      if batch_sequential_path?(env[PATH_INFO_HEADER_KEY])
+      if is_batch_sequential_path?(env[PATH_INFO_HEADER_KEY])
         batch_sequential(env)
-      elsif batch_parallel_path?(env[PATH_INFO_HEADER_KEY])
+      elsif is_batch_parallel_path?(env[PATH_INFO_HEADER_KEY])
         batch_parallel(env)
       else
         @app.call(env) # regular RAILS CRUD
       end
     end
 
-    def batch_sequential_path?(path)
-      path == BatchRequestApi.config.batch_sequential_path
+    def is_batch_sequential_path?(path)
+      BatchRequestApi.config.batch_sequential_paths.include?(path)
     end
 
-    def batch_parallel_path?(path)
-      path == BatchRequestApi.config.batch_parallel_path
+    def is_batch_parallel_path?(path)
+      BatchRequestApi.config.batch_parallel_paths.include?(path)
     end
   end
 end
