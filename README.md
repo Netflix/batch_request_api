@@ -25,6 +25,17 @@ After installing the gem, you get the middleware which will intercept requests t
   * batch_sequential ```(/api/v1/batch_sequential)```
   * batch_parallel ```(/api/v1/batch_parallel)```
 
+To use custom URLs, add a configuration block to your app initialization. Example:
+
+```ruby
+BatchRequestApi.configure do |config|
+  config.batch_sequential_path = '/api/v1/batch_sequential'
+  config.batch_parallel_path = '/api/v1/batch_parallel'
+end
+```
+
+API endpoint can be disabled by setting the path to a falsy value (`nil`/`false`).
+
 ### Sequential Usage
 
 This is the simplest way to implement batch. One network request to ```/api/v1/batch_sequential``` containing the batched payload will work with a regular rails controller.
