@@ -29,8 +29,8 @@ To use custom URLs, add a configuration block to your app initialization. Exampl
 
 ```ruby
 BatchRequestApi.configure do |config|
-  config.batch_sequential_path = '/api/v1/batch_sequential'
-  config.batch_parallel_path = '/api/v1/batch_parallel'
+  config.batch_sequential_paths = ['/api/v1/batch_sequential']
+  config.batch_parallel_paths = ['/api/v1/batch_parallel']
 end
 ```
 
