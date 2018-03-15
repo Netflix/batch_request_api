@@ -1,5 +1,7 @@
 # batch_request_api
 
+[![NetflixOSS Lifecycle](https://img.shields.io/osslifecycle/Netflix/osstracker.svg)]()
+
 Rails middleware gem to achieve Batch creates, updates and deletes.
 
   * Customizable middleware
@@ -23,6 +25,17 @@ After installing the gem, you get the middleware which will intercept requests t
   * batch_sequential ```(/api/v1/batch_sequential)```
   * batch_parallel ```(/api/v1/batch_parallel)```
 
+To use custom URLs, add a configuration block to your app initialization. Example:
+
+```ruby
+BatchRequestApi.configure do |config|
+  config.batch_sequential_paths = ['/api/v1/batch_sequential']
+  config.batch_parallel_paths = ['/api/v1/batch_parallel']
+end
+```
+
+API endpoint can be disabled by setting the path to a falsy value (`nil`/`false`).
+
 ### Sequential Usage
 
 This is the simplest way to implement batch. One network request to ```/api/v1/batch_sequential``` containing the batched payload will work with a regular rails controller.
@@ -40,7 +53,7 @@ The batch request payload is available on the controller using ``` params['json'
 
 We expect that you will probably use the [Ember Add on](https://github.com/Netflix/ember-batch-request) with this gem to make the batch request and receive a response.
 
-If not, no worries we have built a [sample Ruby Client](https://github.com/Netflix/batch_request_client) for you on this gem.
+If not, no worries we have built a [sample Ruby Client](https://github.com/Netflix/batch_request_client) for that reason.
 
 Here are the sample payloads that the middleware expects for [create/update/delete](https://github.com/Netflix/batch_request_api/blob/master/docs/expected_middleware_payload.md).
 The ruby client constructs the format for create action.

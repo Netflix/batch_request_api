@@ -12,29 +12,31 @@ module BatchRequestApi
       responses = process_parallel_request(env, first_request, requests)
       build_response(responses)
     end
+    
+    private
 
-    def process_parallel_request(env, first_request, requests)
-      json_body = requests.map { |item| item['body'] }.to_json
-      setup_env(env, first_request, json_body)
-      handoff_to_rails(env)
-    end
-
-    def set_id_on_record_for_patch(requests)
-      ids = requests.map { |request| request['url'].match(%r((?<=\/)\d+$|(?<=\/)(\d+)(?=\.json$))).to_s }
-      requests.each_with_index do |request, index|
-        request['body']['data']['attributes']['id'] = ids[index] # dependency on json api spec
+      def process_parallel_request(env, first_request, requests)
+        json_body = requests.map { |item| item['body'] }.to_json
+        setup_env(env, first_request, json_body)
+        handoff_to_rails(env)
       end
-      requests
-    end
 
-    def handoff_to_rails(env)
-      status, headers, body = @app.call(env)
-      body.close if body.respond_to? :close
-      if status == 200
-        { status: status, headers: headers, body: JSON.parse(body.join) }
-      else
-        { status: status, headers: headers, body: JSON.parse(body.body) }
+      def set_id_on_record_for_patch(requests)
+        ids = requests.map { |request| request['url'].match(%r((?<=\/)\d+$|(?<=\/)(\d+)(?=\.json$))).to_s }
+        requests.each_with_index do |request, index|
+          request['body']['data']['attributes']['id'] = ids[index] # dependency on json api spec
+        end
+        requests
       end
-    end
+
+      def handoff_to_rails(env)
+        status, headers, body = @app.call(env)
+        body.close if body.respond_to? :close
+        if status == 200
+          { status: status, headers: headers, body: JSON.parse(body.join) }
+        else
+          { status: status, headers: headers, body: JSON.parse(body.body) }
+        end
+      end
   end
 end

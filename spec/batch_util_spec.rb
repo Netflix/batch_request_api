@@ -3,15 +3,15 @@ describe BatchRequestApi::BatchUtil do
 
   end
 
-  it 'can process parallel request'
+  it 'can process parallel request' do
 
   end
 
-  it 'can set id on record for patch requests'
+  it 'can set id on record for patch requests' do
 
   end
 
-  it 'can handoff to rails correctly'
+  it 'can handoff to rails correctly' do
 
   end
 end
