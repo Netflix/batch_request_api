@@ -24,7 +24,7 @@ module BatchRequestApi
         status, headers, body = @app.call(env)
         body.close if body.respond_to? :close
         if status == 200
-          { status: status, headers: headers, response: JSON.parse(body.join) }
+          { status: status, headers: headers, response: JSON.parse(body.body) }
         else
           { status: status, headers: headers, response: JSON.parse(body.body) }
         end
