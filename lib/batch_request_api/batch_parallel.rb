@@ -12,7 +12,7 @@ module BatchRequestApi
       responses = process_parallel_request(env, first_request, requests)
       build_response(responses)
     end
-    
+
     private
 
       def process_parallel_request(env, first_request, requests)
@@ -33,7 +33,7 @@ module BatchRequestApi
         status, headers, body = @app.call(env)
         body.close if body.respond_to? :close
         if status == 200
-          { status: status, headers: headers, body: JSON.parse(body.join) }
+          { status: status, headers: headers, body: JSON.parse(body.body) }
         else
           { status: status, headers: headers, body: JSON.parse(body.body) }
         end
