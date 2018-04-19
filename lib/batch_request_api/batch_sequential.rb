@@ -6,10 +6,17 @@ module BatchRequestApi
 
     def batch_sequential(env)
       requests = get_payload(env)
-      responses = requests.map do |item|
-        process_request(env.deep_dup, item)
+      @fail_fast = env['HTTP_FAIL_FAST']
+      begin
+        responses = requests.map do |item|
+          process_request(env.deep_dup, item)
+        end
+        build_response(response_hash(responses))
+      rescue StandardError => ex
+        responses = [] if responses.nil?
+        responses << ex.message
+        return build_response(response_hash(responses))
       end
-      build_response(response_hash(responses))
     end
 
     private
@@ -23,6 +30,9 @@ module BatchRequestApi
       def handoff_to_rails(env)
         status, headers, body = @app.call(env)
         body.close if body.respond_to? :close
+        if status > 399 && @fail_fast
+          raise StandardError, { status: status, headers: headers, response: JSON.parse(body.first) }
+        end
         { status: status, headers: headers, response: JSON.parse(body.first) }
       end
 
