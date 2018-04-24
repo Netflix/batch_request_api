@@ -20,12 +20,6 @@ module BatchRequestApi
         handoff_to_rails(env)
       end
 
-      def handoff_to_rails(env)
-        status, headers, body = @app.call(env)
-        body.close if body.respond_to? :close
-        { status: status, headers: headers, response: JSON.parse(body.body) }
-      end
-
       def response_hash(responses)
         { status: 200, headers: { 'Content-Type' => 'application/json' }, response: responses }
       end

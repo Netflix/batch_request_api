@@ -28,11 +28,5 @@ module BatchRequestApi
         end
         requests
       end
-
-      def handoff_to_rails(env)
-        status, headers, body = @app.call(env)
-        body.close if body.respond_to? :close
-        { status: status, headers: headers, response: JSON.parse(body.body) }
-      end
   end
 end
